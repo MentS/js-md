@@ -1,4 +1,4 @@
-### JavaScript 的使用
+## JavaScript 的使用
 
 向 HTML 页面中插入 Javascript 的主要方法就是使用 <script></script> 标签元素，有以下属性
 
@@ -9,6 +9,6 @@
 5.  src: 可选。表示包含执行代码的外部文件。
 6.  type: 表示编写脚本语言的的内容类型通常是 text/JavaScript。
 
-#### <noscript> 元素
+### <noscript> 元素
 
 <noscript> 元素 用来让页面平稳的退化。当浏览器不支持 Javascript 时<noscript>i 里面的内容才会显示出来。
