@@ -102,6 +102,7 @@ NaN, 即非数值(Not a Number) 是一个特殊的数值用于表示一个本来
 
 ```javascript
 // 松散类型 在运行根据需要自动转换
+// 显示转换和隐性转换
 
 isNaN(NaN); // true
 isNaN(10); // false
@@ -109,3 +110,76 @@ isNaN("10"); // false(可以转换为 10)
 isNaN("blue"); // false
 isNaN(true); // false(转换为数值 1)
 ```
+
+#### 数值转换
+
+有三个函数可以把非数值转为数值: Number(), parseInt(), parseFloat().Nunmber()用于任何数据类型, 而另外两个专门用于把字符转为数值.三个函数对不同的输入返回不同的结果.
+Number() 函数转换规则如下:
+
+1.  如果是 Boolean 值, true 和 false 分别转换为 1 和 0.
+2.  如果是数字,只是简单的传入和返回.
+3.  如果是 null, 返回 0.
+4.  如果是 undefined, 返回 0.
+5.  如果是字符串: 遵循以下
+    1.  字符串中只包含数字(包扩前面的正负号),将其转换为十进制数值,即 "1" 会变成 1, 而"011" 是 11(前导的 零 被忽略)
+    2.  如果字符串中包含有效的浮点格式 如 "1.1", 则将其转为对应的浮点数值(忽略前导的零)
+    3.  如果字符串中包含有效的十六进制格式,例如"0xf",将其转换为相同大小的 十进制数值
+    4.  如果字符串是空, 转换为 0.
+    5.  如果字符串包含出上述格式之外的字符,转为 NaN
+6.  如果是对象,则调用 valueOf() 方法,然后按上转换.如果结果是 NaN,则调用对象的 toString()方法.
+
+```JavaScript
+Number("Hello 007") // NaN
+Number("")          // 0
+Number("008")       // 8
+Number(true)        // 1
+Number(null)        // 0
+Number(undefined)   // 0
+```
+
+### String 类型
+
+String 类型用于表示零或多个 16 位 Unicode 字符组成的字符序列,即字符串.字符串可以由双引号或单引号表示.
+
+#### 字符串特点
+
+ECMAScript 中的字符串是不可变的,字符串一旦创建,他们的值就不能改变,要改变某个变量保存的字符串,首先要销毁原来的字符串,用心的字符串填充该变量.
+
+#### 转换为字符串
+
+##### toString()
+
+默认情况下以十进制格式返回数值的字符串表示.也可以接受一个参数,表示输出二进制,八进制,等表示.
+
+##### String()
+
+String()函数可以将任何类型的值转换为字符串,遵循以下规则
+
+1.  如果值有 toString()方法,则调用该方法(没有参数),并返回结果
+2.  如果值是 null 返回 null ,是 undefined 返回 undecfined
+
+```JavaScript
+var num = 10;
+num.toString()    // "10"
+num.toString(2)   // "1010"
+num.toString(8)   // "12"
+num.toString(16)  // "a"
+
+String(10)        // "10"
+String(true)      // "true"
+String(null)      // "null"
+String(undefined) // "undefined"
+```
+
+### Object 类型
+
+Object 类型所具有的任何属性和方法也同样存在于更具体的对象中.
+Object 的每个实例都具有以下属性和方法
+
+1.  Constructor: 保存用于创建当前对象的函数,即构造函数
+2.  hasOwnProperty(propertyName): 用于检查给定的属性在当前的实例中是否存在.参数必须以字符串形式
+3.  isPrototypeOf(Object): 用于检查传入的对象是否是另一个对象的原型.
+4.  propertyIsEnumerble(propertyName): 用于检测给定的属性能否枚举
+5.  toLocaleString)(): 返回对象的字符串表示,字符串与执行环境的地区对应
+6.  toString(): 返回对象的字符串表示.
+7.  valueOf(): 返回对象的字符串,数值或布尔值表示.通常与 toString() 返回值相同.
